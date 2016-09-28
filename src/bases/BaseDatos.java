@@ -212,7 +212,7 @@ public class BaseDatos {
         }
     }
 
-    public boolean sqlInsertWithImage(String ruta, String nombre, String insert) {
+    public boolean sqlInsertWithImage(String ruta, String insert) {
         // String insert = "insert into Imagenes(imagen,nombre) values(?,?)";
         FileInputStream fis = null;
         PreparedStatement ps = null;
@@ -221,8 +221,12 @@ public class BaseDatos {
             File file = new File(ruta);
             fis = new FileInputStream(file);
             ps = conexion.prepareStatement(insert);
-            ps.setBinaryStream(1, fis, (int) file.length());
-            ps.setString(2, nombre);
+            ps.setString(1, "1135");
+            ps.setString(2, "David");
+            ps.setString(3, "Benavides");
+            ps.setString(4, "30156");
+            ps.setBinaryStream(5, fis, (int) file.length());
+            //ps.setString(2, nombre);
             ps.executeUpdate();
             conexion.commit();
             return true;

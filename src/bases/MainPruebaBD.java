@@ -12,24 +12,30 @@ package bases;
 public class MainPruebaBD {
 
     //Comentario 1
-    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        BaseDatos objBases= new BaseDatos();
+
+        BaseDatos objBases = new BaseDatos();
         boolean conexion;
-        String sql="";
-        conexion=objBases.crearConexion();
-        if(conexion){
+        String sql = "", ruta = "";
+        conexion = objBases.crearConexion();
+        if (conexion) {
             //sql="insert into profesores (identificacion, nombre, apellido, telefono) values('4567','Pedro','Benavides', '12121')";
-            sql="insert into profesores values('1133','Alejandro','Castro','301')";
-            objBases.ejecutarSQL(sql);
-            System.out.println("Se inserto de manera exitosa");
-        }else{
+            //sql="insert into cursos (nombrecurso,codigocurso,idprofesorcurso) values('Programación Orientada a Objetos','3456','1130')";
+            sql = "insert into profesores (idprofesores,nombreprofesor,apellidoprofesor,telefonoprofesor,imagenp) values(?,?,?,?,?)";
+            ruta = "C:\\Users\\Alejo\\Pictures\\david.JPG";
+            boolean ejecutar = objBases.sqlInsertWithImage(ruta, sql);
+            //objBases.ejecutarSQL(sql);
+            if (ejecutar) {
+                System.out.println("Se inserto de manera exitosa");
+            } else {
+                System.out.println("no se pudo realizar la conexión");
+            }
+        } else {
             System.out.println("no se pudo realizar la conexión");
         }
     }
-    
+
 }
