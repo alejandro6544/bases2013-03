@@ -18,7 +18,6 @@ public class MainPruebaBD {
      */
     public static void main(String[] args) {
         
-        
         BaseDatos objBases= new BaseDatos();
         boolean conexion;
         String sql="";
