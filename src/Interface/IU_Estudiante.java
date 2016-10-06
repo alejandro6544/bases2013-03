@@ -307,8 +307,9 @@ public class IU_Estudiante extends javax.swing.JFrame
         {
             objEstudiante = new Estudiante(idestudiantes, codigoestudiante, nombreestudiante, apellidoestudiante, telefonoestudiante, direccionestudiante, correoestudiante, Rutaimage);
             JOptionPane.showMessageDialog(rootPane, "Se agrego el estudiante");
+            arrEstudiantes.add(objEstudiante);
         }
-        arrEstudiantes.add(objEstudiante);
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

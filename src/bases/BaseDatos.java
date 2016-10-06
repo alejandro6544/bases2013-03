@@ -280,7 +280,7 @@ public class BaseDatos {
         ArrayList arrElementos = new ArrayList();
         String cadena = "";
         try {
-            ResultSet rs = st.executeQuery("SELECT * FROM estudiantes WHERE codigoestudiante=" + buscarpor + "");
+            ResultSet rs = st.executeQuery("SELECT * FROM estudiantes WHERE codigoestudiante='" + buscarpor + "'");
             while (rs.next()) {
                 Imagen imagen = new Imagen();
                 String idestudiantes = rs.getObject("idestudiantes").toString();
