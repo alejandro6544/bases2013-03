@@ -22,7 +22,8 @@ import javax.swing.JOptionPane;
  *
  * @author Alejo
  */
-public class IU_ModificarEstudiante extends javax.swing.JFrame {
+public class IU_ModificarEstudiante extends javax.swing.JFrame
+{
 
     /**
      * Creates new form MostrarEstudiante
@@ -32,7 +33,8 @@ public class IU_ModificarEstudiante extends javax.swing.JFrame {
     String Rutaimage;
     ArrayList arr;
 
-    public IU_ModificarEstudiante() {
+    public IU_ModificarEstudiante()
+    {
         initComponents();
         this.setLocationRelativeTo(null);
         objEstudiante = new Estudiante();
@@ -292,22 +294,32 @@ public class IU_ModificarEstudiante extends javax.swing.JFrame {
         boolean conexion;
         BaseDatos objbases = new BaseDatos();
 
-        try {
+        try
+        {
             conexion = objbases.crearConexion();
-            if (conexion) {
+            if (conexion)
+            {
                 arr = objbases.buscarCodigo(buscarpor);
 
-                jTextField1.setText(arr.get(0).toString());
-                jTextField2.setText(arr.get(2).toString());
-                jTextField3.setText(arr.get(1).toString());
-                jTextField4.setText(arr.get(3).toString());
-                jTextField5.setText(arr.get(4).toString());
-                jTextField6.setText(arr.get(5).toString());
-                jTextField7.setText(arr.get(6).toString());
-                jLabel9.setIcon(new javax.swing.ImageIcon((Image) arr.get(7)));
-
+                if (!arr.isEmpty())
+                {
+                    jTextField1.setText(arr.get(0).toString());
+                    jTextField2.setText(arr.get(2).toString());
+                    jTextField3.setText(arr.get(1).toString());
+                    jTextField4.setText(arr.get(3).toString());
+                    jTextField5.setText(arr.get(4).toString());
+                    jTextField6.setText(arr.get(5).toString());
+                    jTextField7.setText(arr.get(6).toString());
+                    jLabel9.setIcon(new javax.swing.ImageIcon((Image) arr.get(7)));
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(rootPane, "ocurrio un problema de conexión!!!!1 ");
+                }
             }
-        } catch (IOException ex) {
+        }
+        catch (IOException ex)
+        {
             Logger.getLogger(IU_ModificarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -337,8 +349,8 @@ public class IU_ModificarEstudiante extends javax.swing.JFrame {
         String telefonoestudiante;
         String direccionestudiante;
         String correoestudiante;
-         Imagen objI = new Imagen();
-         boolean update;
+        Imagen objI = new Imagen();
+        boolean update;
 
         idestudiantes = jTextField1.getText();
         codigoestudiante = jTextField3.getText();
@@ -348,25 +360,34 @@ public class IU_ModificarEstudiante extends javax.swing.JFrame {
         direccionestudiante = jTextField6.getText();
         correoestudiante = jTextField7.getText();
 
-        if (!"".equals(Rutaimage)) {
+        if (!"".equals(Rutaimage))
+        {
             objEstudiante = new Estudiante(idestudiantes, codigoestudiante, nombreestudiante, apellidoestudiante, telefonoestudiante, direccionestudiante, correoestudiante, Rutaimage);
             objI.setImagen(null);
-        } else {
-            objEstudiante = new Estudiante(idestudiantes, codigoestudiante, nombreestudiante, apellidoestudiante, telefonoestudiante, direccionestudiante, correoestudiante, "");
-            objI.setImagen((Image)arr.get(7));
         }
-        
-        BaseDatos objBD=new BaseDatos();
-        if(objBD.crearConexion()){
-            try {
-                update=objBD.UpdateEstudiante(objEstudiante, objI);
-                if (update) {
-                    JOptionPane.showMessageDialog(rootPane, "Se modifico el Estudiante con código "+codigoestudiante);
-                }else
+        else
+        {
+            objEstudiante = new Estudiante(idestudiantes, codigoestudiante, nombreestudiante, apellidoestudiante, telefonoestudiante, direccionestudiante, correoestudiante, "");
+            objI.setImagen((Image) arr.get(7));
+        }
+
+        BaseDatos objBD = new BaseDatos();
+        if (objBD.crearConexion())
+        {
+            try
+            {
+                update = objBD.UpdateEstudiante(objEstudiante, objI);
+                if (update)
+                {
+                    JOptionPane.showMessageDialog(rootPane, "Se modifico el Estudiante con código " + codigoestudiante);
+                }
+                else
                 {
                     JOptionPane.showMessageDialog(rootPane, "Ocurrio un Erro al modificar el estudiante!!!!");
                 }
-            } catch (SQLException | IOException ex) {
+            }
+            catch (SQLException | IOException ex)
+            {
                 Logger.getLogger(IU_ModificarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -388,26 +409,38 @@ public class IU_ModificarEstudiante extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[])
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        }
+        catch (ClassNotFoundException ex)
+        {
             java.util.logging.Logger.getLogger(IU_ModificarEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        }
+        catch (InstantiationException ex)
+        {
             java.util.logging.Logger.getLogger(IU_ModificarEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        }
+        catch (IllegalAccessException ex)
+        {
             java.util.logging.Logger.getLogger(IU_ModificarEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        }
+        catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(IU_ModificarEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -420,8 +453,10 @@ public class IU_ModificarEstudiante extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 new IU_ModificarEstudiante().setVisible(true);
             }
         });
